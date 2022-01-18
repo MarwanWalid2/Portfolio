@@ -6487,10 +6487,14 @@
                         e.forEach(function(t, n) {
                             var o = t.height, a = t.width * (r / o);
                             i += a, e[n].adjustedWidth = a;
-                        }), e.forEach(function(n) {
-                            var r = n.$item, o = n.adjustedWidth, a = n.nonContentWidth, s = t._getCssFloat(t._$grid, "width") - e.length * a, u = o / i * s;
-                            r.css("width", u + "px");
                         });
+                        for (var o = Math.floor(t._getCssFloat(t._$grid, "width")), a = 0, s = !1; a < e.length; ) {
+                            var u = Math.floor(t._getCssFloat(t._$grid, "width"));
+                            if (u === o || s) {
+                                var c = e[a], l = c.nonContentWidth, f = c.adjustedWidth, d = c.$item, h = o - e.length * l, p = Math.floor(f / i * h);
+                                d.css("width", p + "px"), a++;
+                            } else a = 0, o = u, s = !0;
+                        }
                     }), e += t._maxImagesPerRow, n += t._maxImagesPerRow;
                 }();
                 this._$grid.addClass("grid--ready");
